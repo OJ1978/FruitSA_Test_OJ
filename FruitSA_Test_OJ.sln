@@ -22,6 +22,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{25054DE0-74CF-4907-85E3-D774333F66E3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8356C0C-530F-4B7E-85A6-940A711273DF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\Docs\Fruit SA Test Disclaimer.docx = ..\..\..\Desktop\Docs\Fruit SA Test Disclaimer.docx
+		..\..\..\Desktop\Docs\Fruit SA Test Information.docx = ..\..\..\Desktop\Docs\Fruit SA Test Information.docx
+		..\..\..\Desktop\Docs\Fruit SA Test Screenshots.docx = ..\..\..\Desktop\Docs\Fruit SA Test Screenshots.docx
+		..\..\..\Desktop\Docs\Fruit SA Test Steps.docx = ..\..\..\Desktop\Docs\Fruit SA Test Steps.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{E3330EE9-9D4A-4A43-979A-3B49D5296A3A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\DatabaseScript.sql = ..\..\..\Desktop\DatabaseScript.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
