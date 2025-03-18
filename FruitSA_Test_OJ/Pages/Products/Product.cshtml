@@ -1,0 +1,66 @@
+﻿@page
+@model FruitSA_Test_OJ.Pages.Products.Product.ProductsModel
+
+@*Page for Listing All Products*@
+@Html.AntiForgeryToken()
+<div class="card">
+    <div class="card-header">
+        <h1>Products</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+             </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.ProductCode</td>
+                        <td>@product.Name</td>
+                        <td>@product.CategoryName</td>
+                        <td>@product.Price</td>
+                        <td>
+                            <a asp-page="./EditProduct" asp-route-id="@product.ProductId">Edit</a> |
+                            <a asp-page="./ProductDetails" asp-route-id="@product.ProductId">View</a> |
+                            <a asp-page="./DeleteProduct" asp-route-id="@product.ProductId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-page="./CreateProduct" class="btn btn-primary">Add New Product</a>
+
+        <a class="btn btn-success" onclick="onClick()">Download Products</a>
+
+           @* <input class="btn btn-default" onclick="click()" type="button" />*@
+
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        function onClick() {
+            $.ajax({
+                type: "POST",
+                url: '/?handler=OnGetDownloadAsync', // Replace YOUR_CUSTOM_HANDLER with your handler.
+                contentType: "application/json; charset=utf-8",
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+
+                dataType: "json"
+            }).done(function (data) {
+                console.log(data.result);
+            });
+        }
+    }
+</script>

@@ -1,0 +1,58 @@
+﻿@page
+@model FruitSA_Test_OJ.Pages.Products.Product.CreateProductModel
+
+@*Page for Creating Products*@
+<div class="card">
+    <div class="card-header">
+        <h1>Create Product</h1>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" id="createProduct">
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.Name)
+                    </div>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Product.Name, new { autocomplete = "off" })
+                        </div>
+
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.Description)
+                     </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.Product.Description, new { autocomplete = "off" })
+                    </div>
+                </div>
+
+            <p />
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.CategoryId)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList)
+                    </div>
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.Price)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.Product.Price, new { autocomplete = "off" })
+                    </div>
+                </div>
+            <p />
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input type="file" asp-for="ImageFile" class="form-control" />
+                </div>
+            <p />
+            <div class="row">
+                <div class="large-2 columns">
+                    <input type="submit" value="Create" class="btn btn-danger" />
+                    <a asp-page="./Product" class="btn btn-secondary ml-2">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

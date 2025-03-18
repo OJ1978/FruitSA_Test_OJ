@@ -1,0 +1,43 @@
+﻿@page
+@model FruitSA_Test_OJ.Pages.Categories.Category.CategoryDetailsModel
+
+@*Page for Listing Category Details*@
+<div class="card">
+    <div class="card-header">
+        <h1>Delete @Model.Category.Name</h1>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" id="categoryDetails">
+            <div class="row">
+                <div class="col-sm-1">
+                    @Html.LabelFor(m => m.Category.Name)
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Category.Name, new { @disabled = "true" })
+                </div>
+                <div class="col-sm-1">
+                    @Html.LabelFor(m => m.Category.CategoryCode)
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Category.CategoryCode, new { @disabled = "true" })
+                </div>
+            </div>
+            <p />
+            <div class="row">
+                <div class="col-sm-1">
+                    @Html.CheckBoxFor(m => m.Category.IsActive)
+                </div>
+                <div class="col-sm-4">
+                    @Html.LabelFor(m => m.Category.IsActive, new { @class = "checkbox", name = "activeCategory", @disabled = "true"})
+                </div>
+            </div>
+            <p />
+            <div class="row">
+                <div class="large-2 columns">
+                    <a asp-page="./Category" class="btn btn-secondary ml-2">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

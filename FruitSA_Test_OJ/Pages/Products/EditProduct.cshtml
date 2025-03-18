@@ -1,0 +1,127 @@
+﻿@page
+@model FruitSA_Test_OJ.Pages.Products.Product.EditProductModel
+
+@*Page for Editing Products*@
+<div class="container">
+    <div class="card-header">
+        <h1>Edit @Model.Product.Name</h1>
+    </div>
+    <div class="card-body">
+        @if (!ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+        <form method="post" enctype="multipart/form-data" id="editProduct">
+
+            @Html.HiddenFor(m => m.Product.ProductId)
+            @Html.HiddenFor(m => m.Product.ImageUrl)
+
+             <div class="row">
+                <div class="col-sm-1">
+                    @Html.LabelFor(m => m.Product.Name)
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Product.Name, new { autocomplete = "off" })
+                </div>
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.ProductCode)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.Product.ProductCode, new { autocomplete = "off" })
+                  </div>
+            </div>
+
+            <p />
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.Description)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.Product.Description, new { autocomplete = "off" })
+                    </div>
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.CategoryId)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.Product.CategoryId, Model.CategoryList)
+                    </div>
+                </div>
+
+            <p />
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        @Html.LabelFor(m => m.Product.Price)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.Product.Price, new { autocomplete = "off" })
+                    </div>
+                </div>
+
+            <p />
+            <div class="form-group">
+                <label asp-for="Product.ImageUrl" class="control-label">Picture</label>
+                <img id="productImage" src="" alt="Product Image" style="max-width: 400px; display: none;" />
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="replaceImageButton" class="btn btn-link">
+                    <i class="fa fa-refresh"></i> Replace Image
+                </button>
+                <div id="fileUploadField" style="display: none;">
+                    <label asp-for="ImageFile" class="control-label">Update picture</label>
+                    <input type="file" asp-for="ImageFile" class="form-control" />
+                </div>
+            </div>
+            <p />
+            <div class="row">
+                <div class="large-2 columns">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-page="./Product" class="btn btn-secondary ml-2">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var imageId = @Model.Product.ProductId;
+
+            fetch(`?handler=GetProductImage&id=${imageId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.base64Image) {
+                        const imgElement = document.getElementById('productImage');
+                        imgElement.src = `data:image/jpeg;base64,${data.base64Image}`;
+                        imgElement.style.display = 'block';
+                    } else {
+                        console.log(data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the image:', error);
+                });
+
+            document.getElementById("replaceImageButton").addEventListener("click", function () {
+                var fileUploadField = document.getElementById("fileUploadField");
+                fileUploadField.style.display = "block"; // Show the file upload field
+                this.style.display = "none";  // Hide the "Replace Image" button
+            });
+        });
+    </script>
+}

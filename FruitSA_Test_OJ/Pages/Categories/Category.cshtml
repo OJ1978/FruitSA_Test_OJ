@@ -1,0 +1,38 @@
+﻿@page
+@model FruitSA_Test_OJ.Pages.Categories.Category.CategoryModel
+
+@*Page for Listing All Categories*@
+<div class="card">
+    <div class="card-header">
+        <h1>Categories</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category Code</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model.Categories)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.CategoryCode</td>
+                        <td>@category.IsActive</td>
+                        <td>
+                            <a asp-page="./EditCategory" asp-route-id="@category.CategoryId">Edit</a>
+                            <a asp-page="./CategoryDetails" asp-route-id="@category.CategoryId">View</a> |
+                            <a asp-page="./DeleteCategory" asp-route-id="@category.CategoryId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a asp-page="./CreateCategory" class="btn btn-primary">Add New Category</a>
+    </div>
+</div>
